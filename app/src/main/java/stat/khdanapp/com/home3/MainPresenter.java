@@ -1,15 +1,10 @@
 package stat.khdanapp.com.home3;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.os.Environment;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -19,7 +14,6 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
-import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
@@ -48,7 +42,7 @@ public class MainPresenter extends MvpPresenter<MainViewInterface> {
         @Override
         public void accept(String s) throws Exception {
             Log.d(TAG,s);
-            getViewState().showCustomDialog();
+            showCustomDialog();
             convertImage(s);
 
         }
@@ -82,8 +76,14 @@ public class MainPresenter extends MvpPresenter<MainViewInterface> {
                 });
     }
 
+    Disposable d2;
+
+    public Disposable getD2() {
+        return d2;
+    }
+
     public void convertImage(String path){
-        Disposable d2 = (Disposable) dataModel.converterJpgToPng(path)
+         d2 = (Disposable) dataModel.converterJpgToPng(path)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver() {
@@ -93,6 +93,7 @@ public class MainPresenter extends MvpPresenter<MainViewInterface> {
                     }
                     @Override
                     public void onError(Throwable e) {
+                        getViewState().closeDialog();
                         getViewState().showToast(e.toString());
                     }
 
@@ -103,6 +104,12 @@ public class MainPresenter extends MvpPresenter<MainViewInterface> {
                         getViewState().showToast("Convertation success");
                     }
                 });
+    }
+
+    public void showCustomDialog(){
+
+        getViewState().showCustomDialog();
+
     }
 
     public ListPresenter getListFiles() {

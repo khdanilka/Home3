@@ -1,7 +1,5 @@
 package stat.khdanapp.com.home3;
 
-import android.content.Context;
-
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;

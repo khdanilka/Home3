@@ -46,25 +46,6 @@ public class DataModel {
 
     public Observable converterJpgToPng(final String filepath){
 
-//        boolean success=false;
-//        try {
-//            Bitmap bmp = BitmapFactory.decodeFile(PATH_PHOTO+"/"+filepath);// Create Bitmap object for the original image
-//            // Crate new converted image file object
-//            File convertedImage = new File(PATH_PHOTO + "/convertedimg.png");
-//            // Create FileOutputStream object to write data to the converted image file
-//            FileOutputStream outStream=new FileOutputStream(convertedImage);
-//            // Keep 100 quality of the original image when converting
-//            success=bmp.compress(Bitmap.CompressFormat.PNG, 100, outStream);
-//            outStream.flush();
-//            outStream.close();
-//        } catch (IOException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//        if (success) Log.d("CONVERT", "converting succes");
-       // final String title = FilenameUtils.removeExtension(filepath);
-        //final String[] title = filepath.split(".");
-
         String titleBuf = "";
         if (filepath.indexOf(".") > 0)
             titleBuf = filepath.substring(0, filepath.lastIndexOf("."));
