@@ -11,6 +11,8 @@ interface MainViewInterface extends MvpView {
 
     void init();
     void updateList();
-
     void showToast(String e);
+    void showCustomDialog();
+
+    void closeDialog();
 }

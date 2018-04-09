@@ -48,7 +48,9 @@ public class MainPresenter extends MvpPresenter<MainViewInterface> {
         @Override
         public void accept(String s) throws Exception {
             Log.d(TAG,s);
+            getViewState().showCustomDialog();
             convertImage(s);
+
         }
     }
 
@@ -89,7 +91,6 @@ public class MainPresenter extends MvpPresenter<MainViewInterface> {
                     public void onNext(Object o) {
 
                     }
-
                     @Override
                     public void onError(Throwable e) {
                         getViewState().showToast(e.toString());
@@ -98,6 +99,8 @@ public class MainPresenter extends MvpPresenter<MainViewInterface> {
                     @Override
                     public void onComplete() {
                         showExtDirFiles();
+                        getViewState().closeDialog();
+                        getViewState().showToast("Convertation success");
                     }
                 });
     }
@@ -105,4 +108,7 @@ public class MainPresenter extends MvpPresenter<MainViewInterface> {
     public ListPresenter getListFiles() {
         return listPrestenter;
     }
+
+
+
 }

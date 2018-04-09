@@ -95,4 +95,16 @@ public class MainActivity extends MvpAppCompatActivity implements MainViewInterf
         toast.show();
     }
 
+    DialogFragment dialogFragment;
+
+    @Override
+    public void showCustomDialog(){
+        dialogFragment = new DialogFragment();
+        dialogFragment.show(getSupportFragmentManager(),"cool");
+    }
+
+    @Override
+    public void closeDialog() {
+        dialogFragment.dismiss();
+    }
 }
